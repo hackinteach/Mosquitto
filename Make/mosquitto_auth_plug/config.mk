@@ -1,4 +1,5 @@
 # Select your backends from this list
+WITH_SRV:=no
 BACKEND_CDB ?= no
 BACKEND_MYSQL ?= yes
 BACKEND_SQLITE ?= no

@@ -1,0 +1,29 @@
+version : '2'
+
+services:
+
+  database:
+    image: mysql
+    restart: always
+    volumes:
+      - ./mysql-data:/var/lib/mysql:rw
+    # networks:
+      # - webnet
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "mosquitto"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD: "123456"
+
+  mosquitto:
+    build: .
+    ports:
+      - "1883:1883"
+    # volumes:
+    #   - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    #   - ./mosquitto/passwd:/mosquitto/passwd
+    #   #- ./data:/mosquitto/data
+    #   #- ./log:/mosquitto/log
+    restart: always

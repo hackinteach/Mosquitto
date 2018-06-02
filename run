@@ -1,0 +1,1 @@
+docker run -p 1883:1883 -v mosquitto:/etc/mosquitto/ --name mosquitto -d yplam/mosquitto
