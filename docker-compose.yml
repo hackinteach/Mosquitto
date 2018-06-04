@@ -1,5 +1,9 @@
 version : '2'
 
+networks:
+  mqtt:
+    driver: bridge
+
 services:
 
   database:
@@ -7,8 +11,8 @@ services:
     restart: always
     volumes:
       - ./mysql-data:/var/lib/mysql:rw
-    # networks:
-      # - webnet
+    networks:
+      - mqtt
     ports:
       - "3306:3306"
     environment:
@@ -21,9 +25,8 @@ services:
     build: .
     ports:
       - "1883:1883"
-    # volumes:
-    #   - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-    #   - ./mosquitto/passwd:/mosquitto/passwd
-    #   #- ./data:/mosquitto/data
-    #   #- ./log:/mosquitto/log
+    links:
+      - "database:database"
+    networks:
+      - mqtt
     restart: always
