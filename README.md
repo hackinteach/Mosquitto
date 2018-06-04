@@ -1,18 +1,27 @@
-Mosquitto
-=========
+# Mosquitto
+-
 
-Docker build file for mosquitto with auth plugin.
+To start the docker container simply run
 
-Get it
-======
-sudo docker pull yplam/mosquitto
+```
+> docker-compose up -d --build
+```
 
-Build it
-===========
-docker build -t yplam/mosquitto .
+### Default setting
+-
+#### MySQL:
 
-Run it
-======
-sudo docker run -p 1883:1883 --net=host -v /home/yplam/work/docker/Mosquitto/mosquitto:/etc/mosquitto/ --name mosquitto -d yplam/mosquitto
+- username : user/root
+- password: 123456
+- database: mosquitto
+- port: 3306 (host)
+- data is kept in `mysql-data/`
 
-You need mysql install base on your mosquitto.conf file
+If you need to change this, change in **2 files** : `docker-compose.yml` and `mosquitto/mosquitto.conf` both at almost bottom of the files.
+
+#### Mosquitto
+- ports: 1883
+
+### Based on
+-
+[mosquitto-auth-plug](https://github.com/jpmens/mosquitto-auth-plug)
